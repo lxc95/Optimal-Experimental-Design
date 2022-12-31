@@ -12,6 +12,7 @@ Write-up is available on Overleaf.
   3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_10sources.py".
  
  Important notes:
+ 
  If you want to explore the codes better, please try larger "n_k" for these files above!
  
  Also, try to tune the hyperparameters!
