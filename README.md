@@ -10,6 +10,11 @@ Write-up is available on Overleaf.
   1. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221231.py"
   2. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_5sources.py"
   3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_10sources.py".
+ 
+ Important notes:
+ If you want to explore the codes better, please try larger "n_k" for these files above!
+ 
+ Also, try to tune the hyperparameters!
 
 ![5sensors_10sources](https://user-images.githubusercontent.com/64560217/210156609-ad5dd748-aab5-457c-acdf-2d1a0480afda.png)
 ![wind_condition_2](https://user-images.githubusercontent.com/64560217/210156613-7aed93be-f437-4d9c-87d4-31d6f3090710.png)
