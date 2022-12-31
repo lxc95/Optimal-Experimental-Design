@@ -11,4 +11,4 @@ Write-up is available on Overleaf.
   2. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_5sources.py"
   3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_10sources.py".
 
-More codes are coming soon.
+![2sensor_3source_3](https://user-images.githubusercontent.com/64560217/210128035-c014dff8-cd41-4c9e-91a1-cf80b6ff332a.png)
