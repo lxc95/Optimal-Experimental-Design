@@ -31,6 +31,7 @@ def GradientInnerNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K, H, Phi, s
     num_source = len(source_x)
     A_all = nmp.zeros((num_sensor, num_source))
     for i in range(num_sensor):
+        temp_n = 0  # count th e number of zero A's
         for j in range(num_source):
             x_new = nmp.sqrt(((1. - w_x ** 2.) * (x_all[i] - source_x[j]) - w_x * w_y * (y_all[i] - source_y[j])) ** 2. + (
                     -w_x * w_y * (x_all[i] - source_x[j]) + (1. - w_y ** 2.) * (y_all[i] - source_y[j])) ** 2.)
@@ -39,6 +40,9 @@ def GradientInnerNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K, H, Phi, s
                 A_all[i, j] = 1 / (2. * nmp.pi * K[j] * y_new) * nmp.exp(-u * (x_new ** 2. + H[j] ** 2.) / (4. * K[j] * y_new))
             else:
                 A_all[i, j] = 0.
+                temp_n += 1
+        if temp_n == num_source:
+            Phi[i] = 0
     C_coef = 1./(sigma_e**2)*(A_all.T@A_all) + lambda_1 * nmp.identity(num_source)
     D_coef_T = lambda_2*nmp.ones((num_source,1)) - 1./(sigma_e**2)*A_all.T@Phi
     return [C_coef, D_coef_T]
@@ -159,7 +163,7 @@ def Update_Inner_OuterStep(x_sensor, y_sensor, source_location_x, source_locatio
                                 K, H, Phi, sigma_epsilon, lambda_1, lambda_2)
     # Set the initial guess of theta
     theta_esti_all[i, :] = nmp.zeros((1, N_sources))  # Here we start from zeros
-    lr_inner = 0.00001
+    lr_inner = 0.0001
     para_lr_inner = 200
     for j in range(q):
         Gradient_InerSize_All[j, :] = nmp.matmul(C, theta_esti_all[i, :]) + D_T.T
@@ -238,20 +242,20 @@ ws = nmp.random.normal(ws_mean, ws_std, N_samples)  # the wind angle distributio
 wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
 Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
 Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-w_speed = ws  # the wind speed
+w_speed = nmp.abs(ws)  # the wind speed
 theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
 sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
 # lambda
-lambda_1 = 1./400.
-lambda_2 = 1./400.
+lambda_1 = 1./100.
+lambda_2 = 1./100.
 
 
 # the SGD-based Bi-level approximation method
 # Initialize the locations of sensors
-x_sensor = nmp.random.uniform(0.7, 0.8, N_sensors)
-y_sensor = nmp.random.uniform(-17.1, -17.2, N_sensors)
+x_sensor = nmp.random.uniform(0, 10, N_sensors)
+y_sensor = nmp.random.uniform(-20, 0, N_sensors)
 n_k = 10000
-q = 1000
+q = 300
 Gradient_OuterSize_All_x = nmp.zeros((N_samples, N_sensors))
 Gradient_OuterSize_All_y = nmp.zeros((N_samples, N_sensors))
 all_sensor_x = nmp.zeros((n_k, N_sensors))
@@ -269,15 +273,15 @@ for k in range(n_k):
     wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
     Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
     Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-    w_speed = ws  # the wind speed
-    theta_true_all = nmp.random.multivariate_normal(mean, cov, N_samples)
+    w_speed = nmp.abs(ws)  # the wind speed
+    theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
     sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
     # Generate the sensor readings
     Phi = nmp.zeros((N_sensors, 1))
     for i in range(N_sensors):
-        Phi[i] = TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
+        Phi[i] = nmp.abs(TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
                                                      Wr_x[0], Wr_y[0], w_speed[0], theta_true_all[0, :], K, H,
-                                                     sensor_noise_all[0, i])
+                                                     sensor_noise_all[0, i]))
     # Start the update
     # note that this for-loop is implemented in parallel
     parallel = Parallel(n_jobs=3, prefer="processes")
@@ -297,6 +301,11 @@ for k in range(n_k):
     else:
         x_sensor = x_sensor - lr_outer * (2. * nmp.mean(Gradient_OuterSize_All_x, 0))
         y_sensor = y_sensor - lr_outer * (2. * nmp.mean(Gradient_OuterSize_All_y, 0))
+    for mk in range(N_sensors):
+        x_sensor[mk] = max(-25, x_sensor[mk])
+        x_sensor[mk] = min(25, x_sensor[mk])
+        y_sensor[mk] = max(-25, y_sensor[mk])
+        y_sensor[mk] = min(25, y_sensor[mk])
     all_sensor_x[k, :] = x_sensor
     all_sensor_y[k, :] = y_sensor
     stepsize_x[k, :] = 2. * nmp.mean(Gradient_OuterSize_All_x, 0)  # check the step size of sensor locations

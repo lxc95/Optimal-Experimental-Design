@@ -1,5 +1,4 @@
 import numpy as nmp
-import pylab as p
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from windrose import WindroseAxes
@@ -31,7 +30,6 @@ def GradientInnerNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K, H, Phi, s
     num_source = len(source_x)
     A_all = nmp.zeros((num_sensor, num_source))
     for i in range(num_sensor):
-        temp_n = 0  # count th e number of zero A's
         for j in range(num_source):
             x_new = nmp.sqrt(((1. - w_x ** 2.) * (x_all[i] - source_x[j]) - w_x * w_y * (y_all[i] - source_y[j])) ** 2. + (
                     -w_x * w_y * (x_all[i] - source_x[j]) + (1. - w_y ** 2.) * (y_all[i] - source_y[j])) ** 2.)
@@ -40,9 +38,6 @@ def GradientInnerNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K, H, Phi, s
                 A_all[i, j] = 1 / (2. * nmp.pi * K[j] * y_new) * nmp.exp(-u * (x_new ** 2. + H[j] ** 2.) / (4. * K[j] * y_new))
             else:
                 A_all[i, j] = 0.
-                temp_n += 1
-        if temp_n == num_source:
-            Phi[i] = 0
     C_coef = 1./(sigma_e**2)*(A_all.T@A_all) + lambda_1 * nmp.identity(num_source)
     D_coef_T = lambda_2*nmp.ones((num_source,1)) - 1./(sigma_e**2)*A_all.T@Phi
     return [C_coef, D_coef_T]
@@ -163,7 +158,7 @@ def Update_Inner_OuterStep(x_sensor, y_sensor, source_location_x, source_locatio
                                 K, H, Phi, sigma_epsilon, lambda_1, lambda_2)
     # Set the initial guess of theta
     theta_esti_all[i, :] = nmp.zeros((1, N_sources))  # Here we start from zeros
-    lr_inner = 0.0001
+    lr_inner = 0.01
     para_lr_inner = 200
     for j in range(q):
         Gradient_InerSize_All[j, :] = nmp.matmul(C, theta_esti_all[i, :]) + D_T.T
@@ -190,18 +185,18 @@ cpu_count=os.cpu_count()+1
 x = nmp.linspace(-25, 25, 200)
 y = nmp.linspace(-25, 25, 200)
 
-# Define source location: the source locations are known;
-source_location_x = [-15., -10., -9., -5., 5., 5., 8., 10., 15., 20.]
-source_location_y = [17., -5., 22., 10., 18., 0., -10., 19., -10, 5.]
-N_sources = len(source_location_x)
-# Define the mean and variance of emission rates
-mean = [8., 10., 9., 8., 10., 9., 8., 10., 9., 10.]  # the mean of emission rates for the above sources
-cov = [[1., 0, 0, 0, 0, 0, 0, 0, 0, 0.], [0., 1, 0, 0, 0, 0, 0, 0, 0, 0.], [0., 0, 1, 0, 0, 0, 0, 0, 0, 0.], [0., 0, 0, 1, 0, 0, 0, 0, 0, 0.],
-       [0., 0, 0, 0, 1, 0, 0, 0, 0, 0.], [0., 0, 0, 0, 0, 1, 0, 0, 0, 0.], [0., 0, 0, 0, 0, 0, 1, 0, 0, 0.], [0., 0, 0, 0, 0, 0, 0, 1, 0, 0.],
-       [0., 0, 0, 0, 0, 0, 0, 0, 1, 0.], [0., 0, 0, 0, 0, 0, 0, 0, 0, 1.]]  # the covariance of these emission rates
-# Define the height of stacks and the eddy diffusion coefficient
-H = [2., 2., 2., 2., 2., 2., 2., 2., 2., 2.]  # the height of stacks
-K = [0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.5]  # the eddy diffusion coefficient, which is simplified
+# # Define source location: the source locations are known;
+# source_location_x = [-15., -10., -9., -5., 5., 5., 8., 10., 15., 20.]
+# source_location_y = [17., -5., 22., 10., 18., 0., -10., 19., -10, 5.]
+# N_sources = len(source_location_x)
+# # Define the mean and variance of emission rates
+# mean = [8., 10., 9., 8., 10., 9., 8., 10., 9., 10.]  # the mean of emission rates for the above sources
+# cov = [[1., 0, 0, 0, 0, 0, 0, 0, 0, 0.], [0., 1, 0, 0, 0, 0, 0, 0, 0, 0.], [0., 0, 1, 0, 0, 0, 0, 0, 0, 0.], [0., 0, 0, 1, 0, 0, 0, 0, 0, 0.],
+#        [0., 0, 0, 0, 1, 0, 0, 0, 0, 0.], [0., 0, 0, 0, 0, 1, 0, 0, 0, 0.], [0., 0, 0, 0, 0, 0, 1, 0, 0, 0.], [0., 0, 0, 0, 0, 0, 0, 1, 0, 0.],
+#        [0., 0, 0, 0, 0, 0, 0, 0, 1, 0.], [0., 0, 0, 0, 0, 0, 0, 0, 0, 1.]]  # the covariance of these emission rates
+# # Define the height of stacks and the eddy diffusion coefficient
+# H = [2., 2., 2., 2., 2., 2., 2., 2., 2., 2.]  # the height of stacks
+# K = [0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.5]  # the eddy diffusion coefficient, which is simplified
 
 # # Define source location: the source locations are known;
 # source_location_x = [-15., 5., 10., 15., 20.]
@@ -215,47 +210,47 @@ K = [0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.4, 0.5, 0.6, 0.5]  # the eddy diffusion coe
 # H = [2., 2., 2., 2., 2.]  # the height of stacks
 # K = [0.4, 0.5, 0.6, 0.4, 0.5]  # the eddy diffusion coefficient, which is simplified
 
-# # Define source location: the source locations are known;
-# # This setting is similar to the example we used, but not exactly the same
-# source_location_x = [2., 10., -2.]
-# source_location_y = [2., -5.5, -2.5]
-# N_sources = len(source_location_x)
-# # Define the mean and variance of emission rates
-# mean = [8., 6., 4.]  # the mean of emission rates for the above sources
-# cov = [[8, 0, 0], [0., 8, 0], [0., 0, 8]]  # the covariance of these emission rates
-# # Define the height of stacks and the eddy diffusion coefficient
-# H = [2., 2., 2.]  # the height of stacks
-# K = [0.4, 0.4, 0.4]  # the eddy diffusion coefficient, which is simplified
+# Define source location: the source locations are known;
+# This setting is similar to the example we used, but not exactly the same
+source_location_x = [2., 10., -2.]
+source_location_y = [2., -5.5, -2.5]
+N_sources = len(source_location_x)
+# Define the mean and variance of emission rates
+mean = [8., 6., 4.]  # the mean of emission rates for the above sources
+cov = [[0.05, 0, 0], [0., 0.05, 0], [0., 0, 0.05]]  # the covariance of these emission rates
+# Define the height of stacks and the eddy diffusion coefficient
+H = [2., 2., 2.]  # the height of stacks
+K = [0.4, 0.4, 0.4]  # the eddy diffusion coefficient, which is simplified
 
 # Define the number of Monte Carlo samples
-N_samples = 100
+N_samples = 10
 # Define the number of sensors
-N_sensors = 5
+N_sensors = 2
 # Define the sensor noise level -> the standard deviation
 sigma_epsilon = 0.01
 # Sample from the distribution of the emission rates, the wind condition, and the sensor noise
 ws_mean = 2.
-ws_std = 0.5
-wd_lower = 0.4
-wd_upper = 0.6
+ws_std = 0.05
+wd_lower = 0.515
+wd_upper = 0.516
 ws = nmp.random.normal(ws_mean, ws_std, N_samples)  # the wind angle distribution
 wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
 Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
 Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-w_speed = nmp.abs(ws)  # the wind speed
+w_speed = ws  # the wind speed
 theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
 sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
 # lambda
-lambda_1 = 1./100.
-lambda_2 = 1./100.
+lambda_1 = 1./400.
+lambda_2 = 1./400.
 
 
 # the SGD-based Bi-level approximation method
 # Initialize the locations of sensors
-x_sensor = nmp.random.uniform(0, 10, N_sensors)
-y_sensor = nmp.random.uniform(-20, 0, N_sensors)
-n_k = 10000
-q = 300
+x_sensor = nmp.random.uniform(0., 10., N_sensors)
+y_sensor = nmp.random.uniform(-22.4188, -25, N_sensors)
+n_k = 50000
+q = 1000
 Gradient_OuterSize_All_x = nmp.zeros((N_samples, N_sensors))
 Gradient_OuterSize_All_y = nmp.zeros((N_samples, N_sensors))
 all_sensor_x = nmp.zeros((n_k, N_sensors))
@@ -273,15 +268,15 @@ for k in range(n_k):
     wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
     Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
     Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-    w_speed = nmp.abs(ws)  # the wind speed
-    theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
+    w_speed = ws  # the wind speed
+    theta_true_all = nmp.random.multivariate_normal(mean, cov, N_samples)
     sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
     # Generate the sensor readings
     Phi = nmp.zeros((N_sensors, 1))
     for i in range(N_sensors):
-        Phi[i] = nmp.abs(TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
+        Phi[i] = TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
                                                      Wr_x[0], Wr_y[0], w_speed[0], theta_true_all[0, :], K, H,
-                                                     sensor_noise_all[0, i]))
+                                                     sensor_noise_all[0, i])
     # Start the update
     # note that this for-loop is implemented in parallel
     parallel = Parallel(n_jobs=3, prefer="processes")
@@ -301,6 +296,7 @@ for k in range(n_k):
     else:
         x_sensor = x_sensor - lr_outer * (2. * nmp.mean(Gradient_OuterSize_All_x, 0))
         y_sensor = y_sensor - lr_outer * (2. * nmp.mean(Gradient_OuterSize_All_y, 0))
+    # project the sensor locations
     for mk in range(N_sensors):
         x_sensor[mk] = max(-25, x_sensor[mk])
         x_sensor[mk] = min(25, x_sensor[mk])
@@ -323,28 +319,28 @@ print('{:.4f} s'.format(end-start))  # the computational time
 #
 #
 # [xx, yy] = GradientOuterNew(x_sensor, y_sensor, source_location_x, source_location_y, Wr_x[0], Wr_y[0], w_speed[0], K, H, Phi, sigma_epsilon, lambda_1, mean)
-
-
-# # plot the concentration field
-# C = nmp.zeros((len(x), len(y)))
-# mk = 0  # the index of the sample
-# for i in range(len(x)):
-#     for j in range(len(y)):
-#         for k in range(N_sources):
-#             C[i, j] += TwoDimenGauPlumeM(x[i], y[j], source_location_x[k], source_location_y[k], Wr_x[mk], Wr_y[mk],
-#                                          w_speed[mk], theta_true_all[mk, k], K[k], H[k])
 #
-# xx, yy = nmp.meshgrid(x, y)
-# plt.figure()
-# # plt.ion()
-# plt.pcolor(xx, yy, C.T, cmap='jet')
-# # plt.clim((0, 1e2));
-# # plt.title(stability_str + '\n' + wind_dir_str);
-# plt.xlabel('x')
-# plt.ylabel('y')
-# cb1 = plt.colorbar()
-# # cb1.set_label('$\mu$ g m$^{-3}$');
-# #plt.show()
+
+# plot the concentration field
+C = nmp.zeros((len(x), len(y)))
+mk = 0  # the index of the sample
+for i in range(len(x)):
+    for j in range(len(y)):
+        for k in range(N_sources):
+            C[i, j] += TwoDimenGauPlumeM(x[i], y[j], source_location_x[k], source_location_y[k], Wr_x[mk], Wr_y[mk],
+                                         w_speed[mk], theta_true_all[mk, k], K[k], H[k])
+
+xx, yy = nmp.meshgrid(x, y)
+plt.figure()
+# plt.ion()
+plt.pcolor(xx, yy, C.T, cmap='jet')
+# plt.clim((0, 1e2));
+# plt.title(stability_str + '\n' + wind_dir_str);
+plt.xlabel('x')
+plt.ylabel('y')
+cb1 = plt.colorbar()
+# cb1.set_label('$\mu$ g m$^{-3}$');
+#plt.show()
 
 print(all_sensor_x[:, 0])
 print(all_sensor_y[:, 0])
