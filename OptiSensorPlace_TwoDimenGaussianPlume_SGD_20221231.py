@@ -237,7 +237,7 @@ ws = nmp.random.normal(ws_mean, ws_std, N_samples)  # the wind angle distributio
 wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
 Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
 Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-w_speed = ws  # the wind speed
+w_speed = nmp.abs(ws)  # the wind speed
 theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
 sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
 # lambda
@@ -268,15 +268,15 @@ for k in range(n_k):
     wd = nmp.random.uniform(wd_lower, wd_upper, N_samples) * 360  # the wind speed distribution
     Wr_x = nmp.cos((450. - wd) / 180. * nmp.pi)  # the x part of unit wind vector
     Wr_y = nmp.sin((450. - wd) / 180. * nmp.pi)  # the y part of unit wind vector
-    w_speed = ws  # the wind speed
-    theta_true_all = nmp.random.multivariate_normal(mean, cov, N_samples)
+    w_speed = nmp.abs(ws)  # the wind speed
+    theta_true_all = nmp.abs(nmp.random.multivariate_normal(mean, cov, N_samples))
     sensor_noise_all = nmp.random.normal(0, sigma_epsilon, size=(N_samples, N_sensors))
     # Generate the sensor readings
     Phi = nmp.zeros((N_sensors, 1))
     for i in range(N_sensors):
-        Phi[i] = TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
+        Phi[i] = nmp.abs(TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y,
                                                      Wr_x[0], Wr_y[0], w_speed[0], theta_true_all[0, :], K, H,
-                                                     sensor_noise_all[0, i])
+                                                     sensor_noise_all[0, i]))
     # Start the update
     # note that this for-loop is implemented in parallel
     parallel = Parallel(n_jobs=3, prefer="processes")
