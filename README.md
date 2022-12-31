@@ -6,4 +6,9 @@ Write-up is available on Overleaf.
 "Opti..._SAA" and "Opti..._SGD" files are implementations of the Algorithm 1 and Algorithm 2 for the example we used for IEEE BigData paper.
 "Opti..._SGD_ElasticNet" is the variant of "Opti..._SGD" by considering the ElasticNet regularization in inverse modeling.
 
+2D sensor placement: 
+  1. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221229.py"
+  2. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_5sources.py"
+  3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_10sources.py".
+
 More codes are coming soon.
