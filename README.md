@@ -28,3 +28,4 @@ Write-up is available on Overleaf.
 ![2sensor_3source_11](https://user-images.githubusercontent.com/64560217/210158475-45e4b862-3e9f-4e16-a509-7b8a9628bfb0.png)
 
 ![2sensor_3source_12](https://user-images.githubusercontent.com/64560217/210158866-ac73351f-ff71-4af8-a828-44e8760e6e80.png)
+![5sensor_3source_2](https://user-images.githubusercontent.com/64560217/210195424-93e4b218-feb3-4f97-8efc-9ff9ba9a2115.png)
