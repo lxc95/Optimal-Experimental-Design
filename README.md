@@ -7,9 +7,9 @@ Write-up is available on Overleaf.
 "Opti..._SGD_ElasticNet" is the variant of "Opti..._SGD" by considering the ElasticNet regularization in inverse modeling.
 
 2D sensor placement: 
-  1. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221231.py"
-  2. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_5sources.py"
-  3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20221230_10sources.py".
+  1. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20230101_3sources_withGoodInitial.py"
+  2. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20230101_5sources_withGoodInitial.py"
+  3. "OptiSensorPlace_TwoDimenGaussianPlume_SGD_20230101_10sources_withGoodInitial.py".
  
  Important notes:
  
