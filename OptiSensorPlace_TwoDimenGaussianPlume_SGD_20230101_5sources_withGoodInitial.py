@@ -31,7 +31,7 @@ def objective(v):
     wd_lower = 0.4
     wd_upper = 0.6
     # number of monte carlo samplings
-    N = 50
+    N = 100
     temp = 0
     for nk in range(N):
         ws = nmp.random.normal(ws_mean, ws_std, 1)  # the wind angle distribution
@@ -245,16 +245,16 @@ def Update_Inner_OuterStep(x_sensor, y_sensor, source_location_x, source_locatio
 
 # main
 bounds = nmp.array([[-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25]])
-result = optimize.brute(objective, bounds)
+result = optimize.dual_annealing(objective, bounds)
 # summarize the result
-# evaluate solution
-solution = result[:]
-evaluation = objective(solution)
-print('The initial solution by global solver: f(%s) = %.5f' % (solution, evaluation))
-# evaluate solution
-# solution = result['x']
+# # evaluate solution
+# solution = result[:]
 # evaluation = objective(solution)
 # print('The initial solution by global solver: f(%s) = %.5f' % (solution, evaluation))
+# evaluate solution
+solution = result['x']
+evaluation = objective(solution)
+print('The initial solution by global solver: f(%s) = %.5f' % (solution, evaluation))
 
 # start the local solver to fine-tune the results above
 start = time.time()
