@@ -520,8 +520,13 @@ for k in range(n_k):
                 Theta_error_norm_step_k[k * num_batch + count_temp] = 0
                 for jk in range(batch_size):
                     temp_xy = tempdata[jk]
-                    Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
-                        temp_xy[2])) ** 2 / batch_size
+                    if nmp.any(nmp.isinf(temp_xy[2])) or nmp.any(
+                            nmp.isnan(temp_xy[2])):  # avoid the Inf and NaN value from the inner solver
+                        Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                            theta_true_batch[jk, :])) ** 2 / batch_size
+                    else:
+                        Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                            temp_xy[2])) ** 2 / batch_size
                 if count_while == Num_Backtracking:
                     break
                 count_while += 1
@@ -536,8 +541,12 @@ for k in range(n_k):
                 temp_xy = tempdata[jk]
                 Gradient_OuterSize_All_x[jk, :] = temp_xy[0]
                 Gradient_OuterSize_All_y[jk, :] = temp_xy[1]
-                # Theta_error_norm_step_k[k] += nmp.linalg.norm(temp_xy[2])/N_samples/nmp.linalg.norm(theta_true_all[jk, :])
-                Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(temp_xy[2])) ** 2 / batch_size
+                if nmp.any(nmp.isinf(temp_xy[2])) or nmp.any(nmp.isnan(temp_xy[2])):  # avoid the Inf and NaN value from the inner solver
+                    Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                        theta_true_batch[jk, :])) ** 2 / batch_size
+                else:
+                    Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                        temp_xy[2])) ** 2 / batch_size
                 theta_esti_all[jk, :] = temp_xy[3]
             theta_esti_monitor[k * num_batch + count_temp, :] = temp_xy[3]
             step_alpha[k * num_batch + count_temp] = lr_outer
@@ -578,8 +587,12 @@ for k in range(n_k):
                 temp_xy = tempdata[jk]
                 Gradient_OuterSize_All_x[jk, :] = temp_xy[0]
                 Gradient_OuterSize_All_y[jk, :] = temp_xy[1]
-                # Theta_error_norm_step_k[k] += nmp.linalg.norm(temp_xy[2])/N_samples/nmp.linalg.norm(theta_true_all[jk, :])
-                Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(temp_xy[2])) ** 2 / batch_size
+                if nmp.any(nmp.isinf(temp_xy[2])) or nmp.any(nmp.isnan(temp_xy[2])):  # avoid the Inf and NaN value from the inner solver
+                    Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                        theta_true_batch[jk, :])) ** 2 / batch_size
+                else:
+                    Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
+                        temp_xy[2])) ** 2 / batch_size
                 theta_esti_all[jk, :] = temp_xy[3]
             theta_esti_monitor[k * num_batch + count_temp, :] = temp_xy[3]
             step_alpha[k * num_batch + count_temp] = lr_outer
