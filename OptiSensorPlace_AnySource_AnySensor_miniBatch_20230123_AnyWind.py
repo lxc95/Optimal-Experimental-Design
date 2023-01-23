@@ -45,6 +45,10 @@ nmp.random.seed(0)
         samplings 'N' and the global solver in the function 'Objective' should be tuned according to your requirement.
         If you don't care about the A-optimal designs, you can just take the A-optimal designs as some arbitrary 
         initial guesses of sensor locations.
+        
+        The inner solver is also optional. The existing quadratic programming solvers 'cvxopt_solve_qp', 
+        'quadprog_solve_qp' and the customized solver 'Inner_loop' are all available, but the customized solver needs 
+        to be tuned well.
 """
 
 # User-defined Inputs:
@@ -518,7 +522,7 @@ for k in range(n_k):
                     temp_xy = tempdata[jk]
                     Theta_error_norm_step_k[k * num_batch + count_temp] += (nmp.linalg.norm(
                         temp_xy[2])) ** 2 / batch_size
-                if count_while == Num_iteration_k:
+                if count_while == Num_Backtracking:
                     break
                 count_while += 1
             all_sensor_x[k * num_batch + count_temp, :] = x_sensor
