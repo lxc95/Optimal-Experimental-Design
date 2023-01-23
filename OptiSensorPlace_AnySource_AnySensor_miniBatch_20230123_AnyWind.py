@@ -79,7 +79,7 @@ lambda_1 = 1. / 100.
 lambda_2 = 1. / 100.
 
 # Here are some advanced setting parameters: (You can change those parameters for better performance)
-Num_iteration_k = 2000  # for the maximum iteration steps for the outer iteration
+Num_iteration_k = 200  # for the maximum iteration steps for the outer iteration
 Num_SGD_BatchSize = 1000  # for the batch size in SGD
 Num_Backtracking = 10  # for adapting the outer iteration step size (or called learning rate)
 lr_outer_initial = 0.025  # for the initial learning rate of the backtracking
@@ -403,7 +403,7 @@ result = optimize.dual_annealing(objective, nmp.array(bounds))
 # evaluate solution
 solution = result['x']
 evaluation = objective(solution)
-print('The initial solution by global solver: f(%s) = %.5f' % (solution, evaluation))
+print('Based on A-optimal, the initial solution by global solver: f(%s) = %.5f' % (solution, evaluation))
 
 # the SGD-based Bi-level approximation method
 # Initialize the locations of sensors
