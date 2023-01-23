@@ -66,7 +66,7 @@ K = 0.4 * nmp.ones(N_sources)  # the eddy diffusion coefficient, which is simpli
 # Define the number of Monte Carlo samples
 N_samples = 1000
 # Define the number of sensors
-N_sensors = 3
+N_sensors = 5
 # Define the sensor noise level -> the standard deviation
 sigma_epsilon = 0.01
 # the wind condition
@@ -376,7 +376,6 @@ def Update_Inner_OuterStep(x_sensor_tem, y_sensor_tem, source_location_x_tem, so
     # call the inner loop
     # theta_esti_all[0, :] = Inner_loop(q, C, D_T, N_sources, para_lr_inner, lr_inner, theta_true_all[0, :])
     theta_esti_all_tem[0, :] = cvxopt_solve_qp(C, D_T, -1 * nmp.eye(N_sources_tem), nmp.zeros(N_sources_tem))
-    # theta_esti_all_tem[0, :] = cvxopt_solve_qp(C, D_T, -1 * nmp.zeros((N_sources_tem, N_sources_tem)), 1000+nmp.zeros(N_sources_tem))
     [Gradient_outerAll_x, Gradient_outerAll_y] = GradientOuterNew(x_sensor_tem, y_sensor_tem, source_location_x_tem,
                                                                   source_location_y_tem, Wr_x_tem, Wr_y_tem,
                                                                   w_speed_tem, K_tem, H_tem,
@@ -396,8 +395,6 @@ x = nmp.linspace(-25, 25, 200)
 y = nmp.linspace(-25, 25, 200)
 
 # start the global solver to get the initial solution
-# bounds = nmp.array([[-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25], [-25, 25]])
-# bounds = nmp.array([[-25, 25], [-25, 25]])
 bounds = []
 min_max = [-25, 25]
 for ik in range(2*N_sensors):
@@ -604,16 +601,6 @@ for k in range(n_k):
 end = time.time()
 print('the total calculation time is {:.4f} s'.format(end - start))  # the computational time
 
-# for tesing!
-# Phi = nmp.zeros((N_sensors, 1))
-# for i in range(N_sensors):
-#     Phi[i] = TwoDimenGauPlumeM_AllSource_Reading(x_sensor[i], y_sensor[i], source_location_x, source_location_y, Wr_x[0], Wr_y[0], w_speed[0], theta_true_all[0, :], K, H, sensor_noise_all[0, i])
-# [C_i, D_i_T] = GradientInnerNew(x_sensor, y_sensor, source_location_x, source_location_y, Wr_x[0], Wr_y[0], w_speed[0], K, H, Phi, sigma_epsilon, lambda_1, lambda_2)
-#
-#
-# [xx, yy] = GradientOuterNew(x_sensor, y_sensor, source_location_x, source_location_y, Wr_x[0], Wr_y[0], w_speed[0], K, H, Phi, sigma_epsilon, lambda_1, mean)
-#
-
 print('The trajectory of the X value for the 1st sensor:', all_sensor_x[:, 0])
 print('The trajectory of the Y value for the 1st sensor:', all_sensor_y[:, 0])
 print('The gradients of objective w.r.t X:', stepsize_x)
@@ -673,7 +660,6 @@ l1 = plt.plot(source_location_x, source_location_y, marker='x', markersize=10, l
 l2 = plt.plot(x_sensor, y_sensor, marker='^', markersize=10, linestyle='None')
 plt.xlim([-25, 25])
 plt.ylim([-25, 25])
-# plt.legend((l1, l2), ('emission sources', 'final sensor locations'), bbox_to_anchor=(0, 1.02, 1, 0.2), loc='lower left', mode='expand', ncols=2)
 plt.show()
 
 # figure 4
