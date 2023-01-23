@@ -599,6 +599,7 @@ for k in range(n_k):
         count_temp += 1
     print('Progress: k=', k, ' / ', n_k-1)
     if (nmp.all(nmp.abs(nmp.array(temp_Gx)) < tol_G) and nmp.all(nmp.abs(nmp.array(temp_Gy)) < tol_G)) and k > 1:
+        print('the solution has converged!')
         break
 end = time.time()
 print('the total calculation time is {:.4f} s'.format(end - start))  # the computational time
