@@ -44,7 +44,7 @@ nmp.random.seed(0)
         assumed Gaussian distribution in the function 'Objective'. It is also noted that the number of Monte Carlo 
         samplings 'N' and the global solver in the function 'Objective' should be tuned according to your requirement.
         If you don't care about the A-optimal designs, you can just take the A-optimal designs as some arbitrary 
-        initial guesses of snesor locations.
+        initial guesses of sensor locations.
 """
 
 # User-defined Inputs:
