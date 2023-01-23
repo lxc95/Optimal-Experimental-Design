@@ -286,7 +286,7 @@ def GradientOuterNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K_tem, H_tem
                                        H_tem[i]) * Phi_tem[mk]
             G_y[mk, i] -= 1. / (sigma_e ** 2) * Gradient_A_y(x_all[mk], y_all[mk], source_x[i], source_y[i], w_x, w_y, u, K_tem[i],
                                        H_tem[i]) * Phi_tem[mk]
-    print('G_x:', G_x)
+    # print('G_x:', G_x)
     # note that we used the linear regression package as the linear solver
     # it is better to develop our own linear solver, which should be efficient
     coef_x = nmp.zeros((num_sensor, num_source))
@@ -311,7 +311,7 @@ def GradientOuterNew(x_all, y_all, source_x, source_y, w_x, w_y, u, K_tem, H_tem
             coef_x[i, :] = nmp.zeros(num_source)
             coef_y[i, :] = nmp.zeros(num_source)
     # reg.coef_
-    print('coef_x:', coef_x)
+    # print('coef_x:', coef_x)
     return [coef_x, coef_y]
 
 
@@ -338,7 +338,7 @@ def cvxopt_solve_qp(P, q_tem, G, h, A=None, b=None):
     args.extend([cvxopt.matrix(G), cvxopt.matrix(h)])
     if A is not None:
         args.extend([cvxopt.matrix(A), cvxopt.matrix(b)])
-    sol = cvxopt.solvers.qp(*args)
+    sol = cvxopt.solvers.qp(*args, options={'show_progress': False})
     if 'optimal' not in sol['status']:
         return None
     return nmp.array(sol['x']).reshape((P.shape[1],))
@@ -446,7 +446,7 @@ rng = nmp.random.default_rng(seed=seed)
 
 Theta_error_norm_step_k = nmp.zeros(
     n_k * num_batch) + nmp.inf  # here we add 100 to the inital settings for while loop requirements
-print(Theta_error_norm_step_k)
+# print(Theta_error_norm_step_k)
 theta_esti_monitor = nmp.zeros((n_k * num_batch, N_sources))
 step_alpha = nmp.zeros(n_k * num_batch)
 step_all_x = nmp.zeros((n_k * num_batch, N_sensors))
@@ -552,7 +552,7 @@ for k in range(n_k):
             step_alpha[k * num_batch + count_temp] = lr_outer
             step_all_x[k * num_batch + count_temp] = - lr_outer * temp_Gx
             step_all_y[k * num_batch + count_temp] = - lr_outer * temp_Gy
-            print('the step size:', lr_outer)
+            # print('the step size:', lr_outer)
 
         if k == 0:
             lr_outer = 0.
@@ -597,10 +597,11 @@ for k in range(n_k):
             theta_esti_monitor[k * num_batch + count_temp, :] = temp_xy[3]
             step_alpha[k * num_batch + count_temp] = lr_outer
         count_temp += 1
+    print('Progress: k=', k, ' / ', n_k-1)
     if (nmp.all(nmp.abs(nmp.array(temp_Gx)) < tol_G) and nmp.all(nmp.abs(nmp.array(temp_Gy)) < tol_G)) and k > 1:
         break
 end = time.time()
-print('{:.4f} s'.format(end - start))  # the computational time
+print('the total calculation time is {:.4f} s'.format(end - start))  # the computational time
 
 # for tesing!
 # Phi = nmp.zeros((N_sensors, 1))
@@ -611,6 +612,15 @@ print('{:.4f} s'.format(end - start))  # the computational time
 #
 # [xx, yy] = GradientOuterNew(x_sensor, y_sensor, source_location_x, source_location_y, Wr_x[0], Wr_y[0], w_speed[0], K, H, Phi, sigma_epsilon, lambda_1, mean)
 #
+
+print('The trajectory of the X value for the 1st sensor:', all_sensor_x[:, 0])
+print('The trajectory of the Y value for the 1st sensor:', all_sensor_y[:, 0])
+print('The gradients of objective w.r.t X:', stepsize_x)
+print('The gradients of objective w.r.t Y:', stepsize_y)
+# print('The objective values:', Theta_error_norm_step_k)
+# print(theta_esti_all)
+# print(theta_esti_monitor)
+print('The learning rates at each step:', step_alpha)
 
 # # plot the concentration field
 # C = nmp.zeros((len(x), len(y)))
@@ -633,18 +643,7 @@ print('{:.4f} s'.format(end - start))  # the computational time
 # # cb1.set_label('$\mu$ g m$^{-3}$');
 # #plt.show()
 
-print(all_sensor_x[:, 0])
-print(all_sensor_y[:, 0])
-print(stepsize_x)
-print(stepsize_y)
-print(Theta_error_norm_step_k)
-print(theta_esti_all)
-print(theta_esti_monitor)
-print(step_alpha)
-print(temp_Gx)
-print(temp_Gy)
-
-
+# figure 1
 l1 = plt.scatter(source_location_x, source_location_y, marker='x')
 for i in range(N_sensors):
     plt.scatter(all_sensor_x[:, i], all_sensor_y[:, i], marker='.')
@@ -656,6 +655,7 @@ plt.legend((l1, l2, l3), ('emission sources', 'final sensor locations', 'initial
            bbox_to_anchor=(0, 1.02, 1, 0.2), loc='lower left', mode='expand', ncols=3)
 plt.show()
 
+# figure 2
 l1 = plt.scatter(source_location_x, source_location_y, marker='x')
 plt.plot(all_sensor_x, all_sensor_y)
 l2 = plt.scatter(x_sensor, y_sensor, marker='^')
@@ -666,6 +666,7 @@ plt.legend((l1, l2, l3), ('emission sources', 'final sensor locations', 'initial
            bbox_to_anchor=(0, 1.02, 1, 0.2), loc='lower left', mode='expand', ncols=3)
 plt.show()
 
+# figure 3
 # plot without contour
 l1 = plt.plot(source_location_x, source_location_y, marker='x', markersize=10, linestyle='None')
 l2 = plt.plot(x_sensor, y_sensor, marker='^', markersize=10, linestyle='None')
@@ -674,24 +675,35 @@ plt.ylim([-25, 25])
 # plt.legend((l1, l2), ('emission sources', 'final sensor locations'), bbox_to_anchor=(0, 1.02, 1, 0.2), loc='lower left', mode='expand', ncols=2)
 plt.show()
 
+# figure 4
 # plot the step
 for i in range(N_sensors):
     plt.plot(stepsize_x[:, i])
     plt.plot(stepsize_y[:, i])
+plt.xlabel('the index of iteration')
+plt.ylabel('the gradient of objective w.r.t sensor locations')
 plt.show()
 
+# figure 5
 for i in range(N_sensors):
     plt.plot(step_all_x[:, i])
     plt.plot(step_all_y[:, i])
+plt.xlabel('the index of iteration')
+plt.ylabel('the actual updates of sensor locations')
 plt.show()
 
+# figure 6
 # plot the objective value to show convergence
 plt.plot(Theta_error_norm_step_k)
+plt.xlabel('the index of iteration')
+plt.ylabel('the objective value')
 plt.show()
 
+# figure 7
 ws2 = nmp.random.uniform(ws_lower, ws_upper, 100000)  # the wind speed distribution
 wd2 = nmp.random.uniform(wd_lower, wd_upper, 100000) * 360  # the wind speed distribution
 ax = WindroseAxes.from_ax()
 ax.box(wd2, ws2, bins=nmp.arange(0, 8, 1))
 ax.set_legend()
+plt.title("the wind condition")
 plt.show()
