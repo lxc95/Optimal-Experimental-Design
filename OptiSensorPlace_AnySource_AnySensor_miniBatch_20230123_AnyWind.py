@@ -33,7 +33,7 @@ nmp.random.seed(0)
         14. (optional) The tolerance for step length (i.e., the gradient of the outer iteration), tol_G
     B. Outputs:
         1. The final designs of all required sensors.
-        2. The trajectory of sensors' locations during iterations and the corresponding objective values which is 
+        2. The trajectory of sensors' locations during iterations and the corresponding objective values which are 
            supposed to decrease step by step.
     Note:
         Our solver, which is a local solver, is heavily dependent on the initial guess of source locations. So you 
