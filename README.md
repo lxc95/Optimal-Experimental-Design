@@ -16,8 +16,10 @@ Important notes:
 ### Initial design + bilevel optimization
 <img src="https://github.com/user-attachments/assets/b6bdddb1-fee1-43b4-ab06-7e2c3ef891ec" height="250"/><img src="https://github.com/user-attachments/assets/32b268d6-4486-470a-a86b-5d1c2662dc66" height="250"/>
 
-## Example 1:  allocate 6 sensors for 10 sources
+## Example 2:  allocate 6 sensors for 10 sources
+### Objective value decreases
 <img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" height="230"/><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" height="210"/>
 
-## Example 2:  allocate 50 sensors for 100 sources
+## Example 3:  allocate 50 sensors for 100 sources
+### Scalable sensor allocation
 <img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" height="330"/><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" height="300"/>
