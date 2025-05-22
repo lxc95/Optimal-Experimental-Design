@@ -10,7 +10,11 @@ You can input any source locations, wind condition distributions, emission rate 
  
  Important notes:
   1. Please read the detailed descriptions at the beginnings of the "OptiSensorPlace_AnySource_AnySensor_miniBatch_20230123_AnyWind.py" file.
+     
+Example 1:  allocate 6 sensors for 10 sources
 ![image50](https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed)
 ![image63](https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1)
 
+Example 2:  allocate 50 sensors for 100 sources
 ![image153-ezgif com-optimize](https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c)
+![image152-ezgif com-optimize](https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b)
