@@ -1,10 +1,10 @@
 # Optimal-Experimental-Design
 Title: **Optimal Sensor Allocation with Multiple Linear Dispersion Processes**
 
-"OptiSensorPlace_Torch_AnySource_AnySensor_miniBatch_AnyWind_newWindAngle_20241202_SGD_evaluation_10sensor_20source_3000iter_random_1e5_SGD10000_Aoptimal20_priorSTD20_lambda0.01_smallq_q1_known_lr5e-7.py" file is the implementation of the SBA algorithm without GUI. You can input any source locations, wind condition distributions, emission rate distributions and the number of sensors you would like to place, then the solver will output the final designs.
+"OptiSensorPlace_Torch_AnySource_AnySensor_miniBatch_AnyWind_...known_lr5e-7.py" file is the implementation of the SBA algorithm without GUI. You can input any source locations, wind condition distributions, emission rate distributions and the number of sensors you would like to place, then the solver will output the final designs.
 
 Important notes:
-  1. Please read the detailed descriptions at the beginnings of the "OptiSensorPlace_AnySource_AnySensor_miniBatch_20230123_AnyWind.py" file.
+  1. Please read the detailed descriptions at the beginnings of the "OptiSensorPlace_Torch_AnySource_AnySensor_miniBatch_AnyWind_...known_lr5e-7.py" file.
 
 The 'GUI.py' is developed based on the above codes and you can play with it for your projects.
 
