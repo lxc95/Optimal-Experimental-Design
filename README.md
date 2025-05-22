@@ -14,7 +14,7 @@ Important notes:
 <img src="https://github.com/user-attachments/assets/5dbd52fb-ce1d-4491-973a-1f5d0e4a8e21" height="200"/><img src="https://github.com/user-attachments/assets/cb2eaed0-d46e-4bd6-9007-b9cbf29816dd" height="200"/><img src="https://github.com/user-attachments/assets/8cb072ed-c779-4f5f-92c8-80575928d9e7" height="200"/>
 
 ### Initial design + bilevel optimization
-<img src="https://github.com/user-attachments/assets/b6bdddb1-fee1-43b4-ab06-7e2c3ef891ec" height="200"/><img src="https://github.com/user-attachments/assets/32b268d6-4486-470a-a86b-5d1c2662dc66" height="200"/>
+<img src="https://github.com/user-attachments/assets/b6bdddb1-fee1-43b4-ab06-7e2c3ef891ec" height="250"/><img src="https://github.com/user-attachments/assets/32b268d6-4486-470a-a86b-5d1c2662dc66" height="250"/>
 
 ## Example 1:  allocate 6 sensors for 10 sources
 <img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" height="230"/><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" height="210"/>
