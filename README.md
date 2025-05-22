@@ -17,4 +17,4 @@ You can input any source locations, wind condition distributions, emission rate 
 
 # Example 2:  allocate 50 sensors for 100 sources
 ![image153-ezgif com-optimize](https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c)
-![image152-ezgif com-optimize](https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b)
+<img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" width="500"/>
