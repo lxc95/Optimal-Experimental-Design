@@ -27,4 +27,4 @@ The 'GUI.py' is developed based on the above codes and you can play with it for 
 
 ## Example 4:  the software GUI
 ### - starting with K-means design
-<img src="[https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c](https://github.com/user-attachments/assets/33ee0cd0-7dae-44e0-be14-1413d7fa1148)" height="400"/>
+<img src="https://github.com/user-attachments/assets/33ee0cd0-7dae-44e0-be14-1413d7fa1148" height="400"/>
