@@ -26,5 +26,9 @@ The 'GUI.py' is developed based on the above codes and you can play with it for 
 <img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" height="330"/><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" height="300"/>
 
 ## Example 4:  the software GUI
-### - starting with K-means design
+### - starting with K-means design (using GPU: GeForce GTX 1050 Ti)
 <img src="https://github.com/user-attachments/assets/33ee0cd0-7dae-44e0-be14-1413d7fa1148" height="550"/>
+
+### - starting with K-means design (using GPU: A6000)
+<img src="https://github.com/user-attachments/assets/46c58485-b3c9-4c26-9672-0e6af0d10f35" height="550"/>
+
