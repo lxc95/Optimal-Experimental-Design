@@ -1,5 +1,5 @@
 # Optimal-Experimental-Design
-Title: **Optimal Sensor Allocation with Multiple Linear Dispersion Processes**
+Title: **Optimal Sensor Allocation with Multiple Linear Dispersion Processes**/**Sparse Sensor Allocation for Inverse Problems of Detecting Sparse Leaking Emission Sources**
 
 Please cite:
 **Liu, X., Phan, D., Hwang, Y., Klein, L., Liu, X., & Yeo, K. (2024). Optimal Sensor Allocation with Multiple Linear Dispersion Processes. arXiv preprint arXiv:2401.10437.**
