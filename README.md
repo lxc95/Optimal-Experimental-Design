@@ -4,12 +4,11 @@ Title: **Optimal Sensor Allocation with Multiple Linear Dispersion Processes**/*
 Please cite:
 **Liu, X., Phan, D., Hwang, Y., Klein, L., Liu, X., & Yeo, K. (2024). Optimal Sensor Allocation with Multiple Linear Dispersion Processes. arXiv preprint arXiv:2401.10437.**
 
-"OptiSensorPlace_Torch_AnySource_AnySensor_miniBatch_AnyWind_...known_lr5e-7.py" file is the implementation of the SBA algorithm without GUI. You can input any source locations, wind condition distributions, emission rate distributions and the number of sensors you would like to place, then the solver will output the final designs.
+You can input any source locations, wind condition distributions, emission rate distributions and the number of sensors you would like to place, then the solver will output the final designs. The 'GUI_GPU.py' is developed based on the above codes and you can play with it for your projects.
 
 Important notes:
   1. Please read the detailed descriptions at the beginnings of the "OptiSensorPlace_Torch_AnySource_AnySensor_miniBatch_AnyWind_...known_lr5e-7.py" file.
 
-The 'GUI.py' is developed based on the above codes and you can play with it for your projects.
 
 ## Example 1: a specific concentration field
 ### - Initial guess of sensor locations
