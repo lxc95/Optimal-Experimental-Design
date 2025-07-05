@@ -12,9 +12,9 @@ Important notes:
 
 ## Example 1: a specific concentration field
 ### - Initial guess of sensor locations
-<img src="https://github.com/user-attachments/assets/e9b07830-a72b-4cf0-abd4-9e49b8ec70ab" height="200"/><img src="https://github.com/user-attachments/assets/83bfbe4e-f4e4-43a3-a8a1-38cf6c268638" height="200"/><img src="https://github.com/user-attachments/assets/e415971d-4b7d-474f-b09b-d56b04ad68a6" height="200"/>
+<img src="https://github.com/user-attachments/assets/e9b07830-a72b-4cf0-abd4-9e49b8ec70ab" height="100"/><img src="https://github.com/user-attachments/assets/83bfbe4e-f4e4-43a3-a8a1-38cf6c268638" height="200"/><img src="https://github.com/user-attachments/assets/e415971d-4b7d-474f-b09b-d56b04ad68a6" height="200"/>
 
-<img src="https://github.com/user-attachments/assets/5dbd52fb-ce1d-4491-973a-1f5d0e4a8e21" height="200"/><img src="https://github.com/user-attachments/assets/cb2eaed0-d46e-4bd6-9007-b9cbf29816dd" height="200"/><img src="https://github.com/user-attachments/assets/8cb072ed-c779-4f5f-92c8-80575928d9e7" height="200"/>
+<img src="https://github.com/user-attachments/assets/5dbd52fb-ce1d-4491-973a-1f5d0e4a8e21" height="100"/><img src="https://github.com/user-attachments/assets/cb2eaed0-d46e-4bd6-9007-b9cbf29816dd" height="200"/><img src="https://github.com/user-attachments/assets/8cb072ed-c779-4f5f-92c8-80575928d9e7" height="200"/>
 
 ### - Initial design + bilevel optimization
 <img src="https://github.com/user-attachments/assets/b6bdddb1-fee1-43b4-ab06-7e2c3ef891ec" height="250"/><img src="https://github.com/user-attachments/assets/32b268d6-4486-470a-a86b-5d1c2662dc66" height="250"/>
