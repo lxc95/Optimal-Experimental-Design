@@ -22,7 +22,7 @@ Important notes:
 
 ## Example 2:  allocate 6 sensors for 10 sources
 ### - Objective value decreases
-<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" style="width:40%;"><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" style="width:40%;">
+<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" style="width:20%;"><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" style="width:40%;">
 
 ## Example 3:  allocate 50 sensors for 100 sources
 ### - Scalable sensor allocation
