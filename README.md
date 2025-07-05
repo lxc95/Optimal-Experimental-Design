@@ -24,14 +24,14 @@ Important notes:
 ### - Objective value decreases
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" width="200"/><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" width="300"/>
+<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" width="300"/><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" width="450"/>
 </p>
 
 ## Example 3:  allocate 50 sensors for 100 sources
 ### - Scalable sensor allocation
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" width="200""><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" width="200"">
+<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" width="300""><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" width="400"">
 </p>
 
 ## Example 4:  the software GUI
