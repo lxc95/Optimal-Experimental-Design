@@ -13,7 +13,7 @@ Important notes:
 ## Example 1: a specific concentration field
 ### - Initial guess of sensor locations
 
-<img src="https://github.com/user-attachments/assets/e9b07830-a72b-4cf0-abd4-9e49b8ec70ab" style="width:50%;">
+<img src="https://github.com/user-attachments/assets/e9b07830-a72b-4cf0-abd4-9e49b8ec70ab" style="width:40%;">
 
 <img src="https://github.com/user-attachments/assets/e9b07830-a72b-4cf0-abd4-9e49b8ec70ab" height="10"/><img src="https://github.com/user-attachments/assets/83bfbe4e-f4e4-43a3-a8a1-38cf6c268638" height="10"/><img src="https://github.com/user-attachments/assets/e415971d-4b7d-474f-b09b-d56b04ad68a6" height="10"/>
 
