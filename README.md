@@ -31,10 +31,12 @@ Important notes:
 ### - Scalable sensor allocation
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" width="300""><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" width="250"">
+<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" width="300""><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" width="230"">
 </p>
 
 ## Example 4:  the software GUI
 ### - starting with K-means design (using GPU)
-<img src="https://github.com/user-attachments/assets/46c58485-b3c9-4c26-9672-0e6af0d10f35" style="width:80%;">
 
+<p align="center">
+<img src="https://github.com/user-attachments/assets/46c58485-b3c9-4c26-9672-0e6af0d10f35" style="width:80%;">
+</p>
