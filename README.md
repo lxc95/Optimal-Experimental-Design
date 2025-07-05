@@ -24,7 +24,7 @@ Important notes:
 ### - Objective value decreases
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" style="width:20%;"><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" style="width:20%;">
+<img src="https://github.com/user-attachments/assets/7337f65f-5be7-4678-84c9-baf21aa2a9ed" width="300"/><img src="https://github.com/user-attachments/assets/dadf49f8-5420-4ff5-8bbe-2e8738b502c1" width="300"/>
 </p>
 
 ## Example 3:  allocate 50 sensors for 100 sources
