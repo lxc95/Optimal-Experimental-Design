@@ -26,9 +26,9 @@ Important notes:
 
 ## Example 3:  allocate 50 sensors for 100 sources
 ### - Scalable sensor allocation
-<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" height="330"/><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" height="300"/>
+<img src="https://github.com/user-attachments/assets/941ad77b-4f5c-4f04-a855-cefc10af317c" style="width:40%;"><img src="https://github.com/user-attachments/assets/0d4c48ab-09c0-4dc9-970a-cc686ef8b20b" style="width:40%;">
 
 ## Example 4:  the software GUI
 ### - starting with K-means design (using GPU)
-<img src="https://github.com/user-attachments/assets/46c58485-b3c9-4c26-9672-0e6af0d10f35" height="550"/>
+<img src="https://github.com/user-attachments/assets/46c58485-b3c9-4c26-9672-0e6af0d10f35"style="width:80%;">
 
